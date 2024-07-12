@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            background-color:#D6EFD8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: cursive;
+            font-weight: bolder;
+            margin: 0;
+        }
+        .main{
+            margin-top: 10%;
+            box-shadow:10px 10px 10px 10px #80AF81;
+            border-radius: 10px;
+            padding: 2em;
+        }
+        button{
+            border: none;
+            height: 70px;
+            width: 100px;
+            box-shadow: 5px 5px 10px #80AF81,
+                        -1px -1px 1px #1A5319 ;
+        }
+        button:hover{
+            box-shadow: inset 5px 5px 10px  #80AF81,
+                          1px 1px 1px #1A5319 ;
+        }
+        input{
+            box-shadow: 5px 5px 10px #80AF81,
+            -1px -1px 1px #1A5319;
+            background-color: whitesmoke;
+            border: none;
+            width: 99%;
+            height: 80px;
+            font-size: large;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>  
+    <div class="main">
+        <table>
+            <tr>
+                <td colspan="4"><input id="display" readonly></td>
+            </tr>
+            <tr>
+                <td><button onclick="clearDisplay()">C</button></td>
+                <td><button onclick="toggleSign()">+/-</button></td>
+                <td><button onclick="appendToDisplay('%')">%</button></td>
+                <td><button onclick="deleteLast()">DEL</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToDisplay('7')">7</button></td>
+                <td><button onclick="appendToDisplay('8')">8</button></td>
+                <td><button onclick="appendToDisplay('9')">9</button></td>
+                <td><button onclick="appendToDisplay('/')">/</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToDisplay('4')">4</button></td>
+                <td><button onclick="appendToDisplay('5')">5</button></td>
+                <td><button onclick="appendToDisplay('6')">6</button></td>
+                <td><button onclick="appendToDisplay('*')">x</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToDisplay('1')">1</button></td>
+                <td><button onclick="appendToDisplay('2')">2</button></td>
+                <td><button onclick="appendToDisplay('3')">3</button></td>
+                <td><button onclick="appendToDisplay('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToDisplay('0')">0</button></td>
+                <td><button onclick="appendToDisplay('.')">.</button></td>
+                <td><button onclick="calculateResult()">=</button></td>
+                <td><button onclick="appendToDisplay('+')">+</button></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        const display = document.getElementById("display");
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Error";
+            }
+        }
+
+        function toggleSign() {
+            if (display.value.charAt(0) === '-') {
+                display.value = display.value.slice(1);
+            } else {
+                display.value = '-' + display.value;
+            }
+        }
+    </script>
+</body>
+</html>
